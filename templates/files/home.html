@@ -1,0 +1,211 @@
+{% extends 'files/base.html' %}
+
+{% block title %}FileShare - Secure File Sharing Made Simple{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center min-vh-75">
+            <div class="col-lg-6">
+                <div class="hero-content">
+                    <h1 class="hero-title">
+                        <span class="text-gradient">FileShare</span>
+                        <br>Secure File Sharing
+                        <br><span class="text-primary">Made Simple</span>
+                    </h1>
+                    <p class="hero-description">
+                        Upload, share, and download files with ease. Our modern file sharing platform 
+                        supports QR codes, secure links, and instant downloads across all devices.
+                    </p>
+                    <div class="hero-buttons">
+                        {% if not user.is_authenticated %}
+                        <a href="{% url 'register' %}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-rocket"></i> Get Started Free
+                        </a>
+                        <a href="#features" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-info-circle"></i> Learn More
+                        </a>
+                        {% else %}
+                        <a href="{% url 'upload' %}" class="btn btn-primary btn-lg me-3">
+                            <i class="fas fa-upload"></i> Upload File
+                        </a>
+                        <a href="{% url 'my_files' %}" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-folder"></i> My Files
+                        </a>
+                        {% endif %}
+                    </div>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">{{ files|length|add:"0" }}</span>
+                            <span class="stat-label">Files Shared</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">∞</span>
+                            <span class="stat-label">Storage</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-visual">
+                    <div class="floating-card card-1">
+                        <i class="fas fa-file-upload"></i>
+                        <span>Upload</span>
+                    </div>
+                    <div class="floating-card card-2">
+                        <i class="fas fa-qrcode"></i>
+                        <span>QR Code</span>
+                    </div>
+                    <div class="floating-card card-3">
+                        <i class="fas fa-download"></i>
+                        <span>Download</span>
+                    </div>
+                    <div class="hero-phone">
+                        <div class="phone-mockup">
+                            <div class="phone-screen">
+                                <div class="qr-demo">
+                                    <div class="qr-placeholder"></div>
+                                    <p>Scan to Download</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="features-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">Why Choose FileShare?</h2>
+                <p class="section-subtitle">Powerful features that make file sharing effortless</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h4>QR Code Sharing</h4>
+                    <p>Generate QR codes for instant file sharing. Just scan and download on any device.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Secure & Private</h4>
+                    <p>Your files are protected with secure links and optional privacy settings.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Mobile Friendly</h4>
+                    <p>Works perfectly on all devices - desktop, tablet, and mobile phones.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h4>Instant Downloads</h4>
+                    <p>No waiting, no registration required for downloads. Just click and go.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Download Tracking</h4>
+                    <p>Monitor how many times your files have been downloaded.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h4>Global Access</h4>
+                    <p>Share files with anyone, anywhere in the world with internet access.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Public Files Section -->
+<section class="public-files-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5">
+                <h2 class="section-title">
+                    <i class="fas fa-folder-open"></i> Recently Shared Files
+                </h2>
+                <p class="section-subtitle">Discover files shared by our community</p>
+            </div>
+        </div>
+        
+        {% if files %}
+            <div class="row">
+                {% for file in files %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card file-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-file"></i> {{ file.title }}
+                            </h5>
+                            <p class="card-text text-muted">
+                                <small>{{ file.description|truncatechars:100 }}</small>
+                            </p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-download"></i> {{ file.download_count }} downloads
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar"></i> {{ file.upload_date|date:"M d, Y" }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <div class="d-flex justify-content-between flex-wrap gap-1">
+                                <a href="{% url 'download' file.id %}" class="btn btn-primary btn-sm">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                                <a href="{% url 'share' file.share_code %}" class="btn btn-outline-secondary btn-sm">
+                                    <i class="fas fa-share"></i> Share
+                                </a>
+                                <a href="{% url 'share' file.share_code %}" class="btn btn-outline-info btn-sm">
+                                    <i class="fas fa-qrcode"></i> QR
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No files available</h4>
+                <p class="text-muted">Be the first to upload a file!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

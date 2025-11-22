@@ -1,0 +1,65 @@
+{% extends 'files/base.html' %}
+
+{% block title %}Groups - FileShare{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="fas fa-users"></i> My Groups</h2>
+            <a href="{% url 'create_group' %}" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Create New Group
+            </a>
+        </div>
+        
+        {% if groups %}
+            <div class="row">
+                {% for group in groups %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card file-card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <i class="fas fa-layer-group"></i> {{ group.name }}
+                            </h5>
+                            {% if group.description %}
+                            <p class="card-text text-muted">
+                                <small>{{ group.description|truncatechars:100 }}</small>
+                            </p>
+                            {% endif %}
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <small class="text-muted">
+                                    <i class="fas fa-user"></i> {{ group.members.count }} members
+                                </small>
+                                <small class="text-muted">
+                                    <i class="fas fa-calendar"></i> {{ group.created_at|date:"M d, Y" }}
+                                </small>
+                            </div>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">
+                                    <i class="fas fa-user-cog"></i> Created by: {{ group.created_by.username }}
+                                </small>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="{% url 'group_detail' group.id %}" class="btn btn-primary btn-sm w-100">
+                                <i class="fas fa-eye"></i> View Group
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="text-center py-5">
+                <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                <h4 class="text-muted">No groups yet</h4>
+                <p class="text-muted">Create a group to share files with multiple users at once!</p>
+                <a href="{% url 'create_group' %}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i> Create Your First Group
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

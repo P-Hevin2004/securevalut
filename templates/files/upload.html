@@ -48,7 +48,7 @@
                                 {% endfor %}
                             </div>
                         {% endif %}
-                        <div class="form-text">Maximum file size: 10MB</div>
+                        <div class="form-text">Maximum file size: 100MB</div>
                     </div>
                     
                     <div class="mb-3 form-check">
@@ -56,6 +56,45 @@
                         <label class="form-check-label" for="{{ form.is_public.id_for_label }}">
                             Make this file public (visible to everyone)
                         </label>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.allowed_users.id_for_label }}" class="form-label">
+                            <i class="fas fa-users"></i> Share with Users (Hold Ctrl/Cmd to select multiple)
+                        </label>
+                        {{ form.allowed_users }}
+                        {% if form.allowed_users.help_text %}
+                            <div class="form-text">{{ form.allowed_users.help_text }}</div>
+                        {% endif %}
+                        {% if form.allowed_users.errors %}
+                            <div class="text-danger">
+                                {% for error in form.allowed_users.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="{{ form.allowed_groups.id_for_label }}" class="form-label">
+                            <i class="fas fa-layer-group"></i> Share with Groups (Hold Ctrl/Cmd to select multiple)
+                        </label>
+                        {{ form.allowed_groups }}
+                        {% if form.allowed_groups.help_text %}
+                            <div class="form-text">{{ form.allowed_groups.help_text }}</div>
+                        {% endif %}
+                        {% if form.allowed_groups.errors %}
+                            <div class="text-danger">
+                                {% for error in form.allowed_groups.errors %}
+                                    <small>{{ error }}</small>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                        <div class="form-text">
+                            <a href="{% url 'groups_list' %}" class="text-primary">
+                                <i class="fas fa-plus-circle"></i> Create a new group
+                            </a>
+                        </div>
                     </div>
                     
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">

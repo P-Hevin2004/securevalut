@@ -3,6 +3,20 @@
 {% block title %}Share File - File Share System{% endblock %}
 
 {% block content %}
+<style>
+    .social-share-btn {
+        min-width: 120px;
+        margin: 5px;
+        transition: transform 0.2s ease;
+    }
+    .social-share-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    .social-share-btn i {
+        margin-right: 5px;
+    }
+</style>
 <div class="row justify-content-center">
     <div class="col-md-8">
         <div class="card">
@@ -49,13 +63,13 @@
                             </div>
                             
                             <!-- Share Link Section -->
-                            <div class="col-12">
+                            <div class="col-12 mb-4">
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h6 class="card-title">
                                             <i class="fas fa-link"></i> Share Link
                                         </h6>
-                                        <div class="input-group">
+                                        <div class="input-group mb-3">
                                             <input type="text" class="form-control" id="shareLink" 
                                                    value="{{ share_url }}" readonly>
                                             <button class="btn btn-outline-secondary" type="button" onclick="copyLink()">
@@ -65,6 +79,85 @@
                                         <small class="text-muted mt-2 d-block">
                                             Copy this link to share with others
                                         </small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Social Media Sharing Section -->
+                            <div class="col-12">
+                                <div class="card bg-light">
+                                    <div class="card-body">
+                                        <h6 class="card-title">
+                                            <i class="fas fa-share-alt"></i> Share on Social Media
+                                        </h6>
+                                        <div class="d-flex flex-wrap gap-2 justify-content-center">
+                                            <!-- WhatsApp -->
+                                            <a href="https://wa.me/?text={{ share_url|urlencode }}" 
+                                               target="_blank" 
+                                               class="btn btn-success btn-sm social-share-btn" 
+                                               title="Share on WhatsApp">
+                                                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                                            </a>
+                                            
+                                            <!-- Facebook -->
+                                            <a href="https://www.facebook.com/sharer/sharer.php?u={{ share_url|urlencode }}" 
+                                               target="_blank" 
+                                               class="btn btn-primary btn-sm social-share-btn" 
+                                               title="Share on Facebook">
+                                                <i class="fa-brands fa-facebook"></i> Facebook
+                                            </a>
+                                            
+                                            <!-- Twitter/X -->
+                                            <a href="https://twitter.com/intent/tweet?url={{ share_url|urlencode }}&text=Check%20out%20this%20file" 
+                                               target="_blank" 
+                                               class="btn btn-info btn-sm social-share-btn" 
+                                               title="Share on Twitter/X">
+                                                <i class="fa-brands fa-twitter"></i> Twitter
+                                            </a>
+                                            
+                                            <!-- LinkedIn -->
+                                            <a href="https://www.linkedin.com/sharing/share-offsite/?url={{ share_url|urlencode }}" 
+                                               target="_blank" 
+                                               class="btn btn-primary btn-sm social-share-btn" 
+                                               title="Share on LinkedIn">
+                                                <i class="fa-brands fa-linkedin"></i> LinkedIn
+                                            </a>
+                                            
+                                            <!-- Email -->
+                                            <a href="mailto:?subject=File%20Share&body=Check%20out%20this%20file:%20{{ share_url|urlencode }}" 
+                                               class="btn btn-secondary btn-sm social-share-btn" 
+                                               title="Share via Email">
+                                                <i class="fas fa-envelope"></i> Email
+                                            </a>
+                                            
+                                            <!-- Telegram -->
+                                            <a href="https://t.me/share/url?url={{ share_url|urlencode }}&text=Check%20out%20this%20file" 
+                                               target="_blank" 
+                                               class="btn btn-info btn-sm social-share-btn" 
+                                               title="Share on Telegram">
+                                                <i class="fa-brands fa-telegram"></i> Telegram
+                                            </a>
+                                            
+                                            <!-- Reddit -->
+                                            <a href="https://reddit.com/submit?url={{ share_url|urlencode }}&title={{ file.title|urlencode }}" 
+                                               target="_blank" 
+                                               class="btn btn-danger btn-sm social-share-btn" 
+                                               title="Share on Reddit">
+                                                <i class="fa-brands fa-reddit"></i> Reddit
+                                            </a>
+                                            
+                                            <!-- Copy Link (for Instagram and others) -->
+                                            <button class="btn btn-outline-dark btn-sm social-share-btn" 
+                                                    onclick="copyLink(); return false;" 
+                                                    title="Copy link for Instagram or other apps">
+                                                <i class="fas fa-copy"></i> Copy Link
+                                            </button>
+                                        </div>
+                                        <div class="mt-3 text-center">
+                                            <small class="text-muted">
+                                                <i class="fas fa-info-circle"></i> Note: For Instagram, copy the link and paste it in your story or post
+                                            </small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

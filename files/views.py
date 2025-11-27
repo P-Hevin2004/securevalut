@@ -115,7 +115,13 @@ def download_file(request, file_id):
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
             response = HttpResponse(f.read(), content_type='application/octet-stream')
-            response['Content-Disposition'] = f'attachment; filename="{file_obj.title}"'
+            # Ensure filename has the correct extension
+            filename = file_obj.title
+            _, ext = os.path.splitext(file_path)
+            if not filename.lower().endswith(ext.lower()):
+                filename += ext
+                
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
             return response
     else:
         raise Http404("File not found")
@@ -175,7 +181,13 @@ def download_shared_file(request, share_code):
     if os.path.exists(file_path):
         with open(file_path, 'rb') as f:
             response = HttpResponse(f.read(), content_type='application/octet-stream')
-            response['Content-Disposition'] = f'attachment; filename="{file_obj.title}"'
+            # Ensure filename has the correct extension
+            filename = file_obj.title
+            _, ext = os.path.splitext(file_path)
+            if not filename.lower().endswith(ext.lower()):
+                filename += ext
+                
+            response['Content-Disposition'] = f'attachment; filename="{filename}"'
             return response
     else:
         raise Http404("File not found")

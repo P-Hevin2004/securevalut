@@ -83,23 +83,8 @@ Monitor activity
 Delete or review uploaded files
 
 📂 Project Structure
-fileshare_system/
-├── files/                    # Main app
-│   ├── models.py            # Database models
-│   ├── views.py             # Views
-│   ├── forms.py             # Forms
-│   └── urls.py              # URL patterns
-├── templates/
-│   └── files/
-│       ├── base.html
-│       ├── home.html
-│       ├── register.html
-│       ├── upload.html
-│       ├── my_files.html
-│       └── share.html
-├── media/                   # Uploaded files
-├── manage.py
-└── requirements.txt
+
+<img width="526" height="526" alt="image" src="https://github.com/user-attachments/assets/2d5299ea-6ffe-44ec-9126-6cb76029561e" />
 
 🔐 Security Features
 

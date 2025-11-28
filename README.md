@@ -1,138 +1,161 @@
-📁 File Share System
+# SecureValut 🔐
+A beautiful, responsive file sharing web app built with Django — upload, manage, and securely share files with ease.
 
-A simple and powerful Django-based file sharing system that allows users to upload, manage, share, and download files securely.
+[![Django](https://img.shields.io/badge/Django-4.2-green.svg)](https://www.djangoproject.com/)
+[![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![Issues](https://img.shields.io/github/issues/Dhruv-4985/securevalut)](https://github.com/Dhruv-4985/securevalut/issues)
 
-🚀 Features
-👤 User Management
+Live demo (optional): https://your-demo-url.example.com
 
-User registration
+Overview
+--------
+SecureValut is a simple, secure, and responsive Django-based file sharing system. It focuses on usability and mobile-first design so users can upload, manage, share, and download files from any device.
 
-Secure login & authentication
+Why this README?
+----------------
+This new README highlights the app’s responsive UI, key features, setup steps, and visual assets so contributors and users can quickly evaluate, run, and test the project.
 
-📤 File Upload
+Key Features
+------------
+- Responsive, mobile-friendly UI (desktop/tablet/phone supported)
+- User registration & authentication
+- Upload files with title & description
+- Public or private visibility per file
+- Auto-generated shareable links for public files
+- Protected access for private files (login / share-code)
+- Download analytics (counts)
+- Admin management via Django Admin
 
-Upload files with title & description
+Quick screenshots
+----------------
+Add screenshots/gifs to the repo at /assets/ (e.g. assets/screenshot-desktop.png, assets/screenshot-mobile.png, assets/demo.gif)
 
-Choose public or private visibility
+Example:
 
-🔗 File Sharing
+- Desktop view: assets/screenshot-desktop.png
+- Mobile view: assets/screenshot-mobile.png
+- Live demo / responsive interaction: assets/demo.gif
 
-Auto-generated shareable links
+Responsive UI notes
+-------------------
+The frontend uses a responsive layout so the app adapts across device widths. Suggested CSS stacks:
+- Tailwind CSS or Bootstrap for utility-first responsive classes
+- CSS Grid / Flexbox for file cards and dashboard
+- Accessible color contrast and keyboard navigation for forms
 
-Share without login
+Tech stack
+----------
+- Backend: Django
+- Database: SQLite (dev) / PostgreSQL (recommended for prod)
+- Frontend: HTML5, CSS3, responsive framework (Bootstrap/Tailwind), optional Vanilla JS
+- Storage: local MEDIA (dev) / S3-compatible for production
 
-⬇️ File Download
+Get started — development (quick)
+-------------------------------
+Clone, install, migrate, run:
 
-Direct downloads
+```bash
+git clone https://github.com/Dhruv-4985/securevalut.git
+cd securevalut
 
-Protected download handler
+python -m venv .venv
+source .venv/bin/activate   # macOS / Linux
+# .venv\Scripts\activate    # Windows
 
-🗂 File Management
-
-View files in My Files
-
-Delete uploaded files
-
-Manage visibility
-
-📊 Analytics
-
-Track file download count
-
-🛠 Installation
-1️⃣ Clone the project
-cd fileshare_system
-
-2️⃣ Install dependencies
 pip install -r requirements.txt
 
-3️⃣ Run migrations
+# create .env or set env vars (see Configuration)
 python manage.py migrate
-
-4️⃣ Create admin user (optional)
-python manage.py createsuperuser
-
-5️⃣ Start development server
+python manage.py createsuperuser   # optional
 python manage.py runserver
+```
 
-6️⃣ Access the application
+Open: http://127.0.0.1:8000
 
-User site → http://127.0.0.1:8000
+Configuration
+-------------
+Create a .env (or set environment variables) with values similar to:
 
-Admin panel → http://127.0.0.1:8000/admin
+```
+SECRET_KEY=your-secret-key
+DEBUG=True
+ALLOWED_HOSTS=127.0.0.1,localhost
+DATABASE_URL=sqlite:///db.sqlite3
+MEDIA_ROOT=./media
+MEDIA_URL=/media/
+```
 
-📘 Usage
-👤 For Users
+For production:
+- Use a strong SECRET_KEY
+- DEBUG=False
+- Configure secure storage (S3) and a production-ready DB (Postgres)
+- Configure HTTPS and ALLOWED_HOSTS
 
-Register a new account
+Deployment tips
+---------------
+- Serve static files via a CDN or nginx + WhiteNoise
+- Use Gunicorn + nginx for best performance
+- Configure environment variables via your host (Heroku, DigitalOcean App Platform, etc.)
 
-Upload files
+Testing
+-------
+Run the Django test suite:
 
-View & manage your files
+```bash
+python manage.py test
+```
 
-Share using unique links
+Accessibility & UX
+------------------
+- Use semantic HTML and aria attributes for controls
+- Ensure forms provide helpful validation messages
+- Ensure keyboard accessibility for file cards and share modal
 
-Download your or shared files
+Contributing
+------------
+Contributions are welcome! Suggested workflow:
+1. Fork the repo
+2. Create a topic branch: git checkout -b feat/responsive-ui
+3. Make changes, add/update tests and screenshots in /assets
+4. Push and open a PR with a short description of changes
 
-🛠 For Admins
+Please open issues for bugs or enhancement ideas.
 
-Manage users
+Ideas for improving UI/UX
+- Add drag-and-drop upload on desktop
+- Add progress bar for large uploads (AJAX)
+- Make share modal with optional expiration and password protection
+- Add user profile page to manage uploaded files and settings
 
-Monitor activity
+Project structure (high-level)
+------------------------------
+- securevalut/        - Django project settings
+- app/                - main app: models, views, forms, templates, static
+- templates/          - HTML templates (use responsive layouts)
+- static/             - CSS, JS, images
+- assets/             - screenshots, demo GIFs (add these)
+- requirements.txt
 
-Delete or review uploaded files
+FAQ / Troubleshooting
+---------------------
+- Media files not showing?
+  - Check MEDIA_URL and MEDIA_ROOT in settings and that Django serves media in dev.
+- Upload fails?
+  - Check FILE_UPLOAD_MAX_MEMORY_SIZE and file permissions.
+- Database errors?
+  - Run python manage.py migrate
 
-📂 Project Structure
+License
+-------
+MIT — see LICENSE
 
-<img width="526" height="526" alt="image" src="https://github.com/user-attachments/assets/2d5299ea-6ffe-44ec-9126-6cb76029561e" />
+Contact
+-------
+Maintainer: Dhruv-4985
+GitHub: https://github.com/Dhruv-4985/securevalut
 
-🔐 Security Features
-
-Unique file names
-
-Authentication required for private files
-
-Secure share-code-based access
-
-Validated uploads
-
-🎛 Customization
-📏 Change upload size limit (settings.py)
-FILE_UPLOAD_MAX_MEMORY_SIZE = 10485760  # 10MB
-
-🔍 Validate file type (forms.py)
-def clean_file(self):
-    file = self.cleaned_data.get('file')
-    # Add validation rules here
-    return file
-
-🧰 Troubleshooting
-❗ Media files not loading
-
-Verify:
-
-MEDIA_URL
-MEDIA_ROOT
-
-
-are configured properly.
-
-❗ File upload issues
-
-Check file size limit
-
-Check media folder permissions
-
-❗ Database errors
-
-Run:
-
-python manage.py migrate
-
-🧪 Development Tips
-
-Use python manage.py runserver
-
-Monitor Django server logs
-
-Use Django Admin for debugging
+What's next
+-----------
+- Add the visual assets (screenshots and demo GIF) to /assets in the repo so this README renders beautifully.
+- If you want, I can commit this README.md for you on a new branch and open a PR; say "commit README" and I'll prepare the branch and push the file.

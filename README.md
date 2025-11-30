@@ -1,161 +1,134 @@
 # SecureValut 🔐
-A beautiful, responsive file sharing web app built with Django — upload, manage, and securely share files with ease.
+
+A beautiful, responsive file sharing web app built with Django. Upload, manage, and securely share files with ease.
 
 [![Django](https://img.shields.io/badge/Django-4.2-green.svg)](https://www.djangoproject.com/)
 [![Python](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
-[![Issues](https://img.shields.io/github/issues/Dhruv-4985/securevalut)](https://github.com/Dhruv-4985/securevalut/issues)
 
-Live demo (optional): https://your-demo-url.example.com
+## 🌟 Features
 
-Overview
---------
-SecureValut is a simple, secure, and responsive Django-based file sharing system. It focuses on usability and mobile-first design so users can upload, manage, share, and download files from any device.
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices.
+- **Secure Authentication**: User registration and login system.
+- **File Management**: Upload files with titles and descriptions.
+- **Sharing Options**: 
+  - **Public**: Auto-generated shareable links.
+  - **Private**: Secure access for specific users.
+- **Download Tracking**: Monitor how many times your files are downloaded.
+- **Admin Dashboard**: Manage users and files via Django Admin.
 
-Why this README?
-----------------
-This new README highlights the app’s responsive UI, key features, setup steps, and visual assets so contributors and users can quickly evaluate, run, and test the project.
+## 🛠️ Tech Stack
 
-Key Features
-------------
-- Responsive, mobile-friendly UI (desktop/tablet/phone supported)
-- User registration & authentication
-- Upload files with title & description
-- Public or private visibility per file
-- Auto-generated shareable links for public files
-- Protected access for private files (login / share-code)
-- Download analytics (counts)
-- Admin management via Django Admin
+- **Backend**: Django (Python)
+- **Frontend**: HTML5, CSS3, Bootstrap 5 / Custom CSS
+- **Database**: SQLite (Development)
+- **Icons**: FontAwesome
 
-Quick screenshots
-----------------
-Add screenshots/gifs to the repo at /assets/ (e.g. assets/screenshot-desktop.png, assets/screenshot-mobile.png, assets/demo.gif)
+## 📋 Prerequisites
 
-Example:
+Before you begin, ensure you have the following installed:
+- [Python 3.8+](https://www.python.org/downloads/)
+- [Git](https://git-scm.com/downloads)
 
-- Desktop view: assets/screenshot-desktop.png
-- Mobile view: assets/screenshot-mobile.png
-- Live demo / responsive interaction: assets/demo.gif
+## 🚀 Installation & Setup
 
-Responsive UI notes
--------------------
-The frontend uses a responsive layout so the app adapts across device widths. Suggested CSS stacks:
-- Tailwind CSS or Bootstrap for utility-first responsive classes
-- CSS Grid / Flexbox for file cards and dashboard
-- Accessible color contrast and keyboard navigation for forms
+Follow these steps to get the project running on your local machine.
 
-Tech stack
-----------
-- Backend: Django
-- Database: SQLite (dev) / PostgreSQL (recommended for prod)
-- Frontend: HTML5, CSS3, responsive framework (Bootstrap/Tailwind), optional Vanilla JS
-- Storage: local MEDIA (dev) / S3-compatible for production
-
-Get started — development (quick)
--------------------------------
-Clone, install, migrate, run:
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Dhruv-4985/securevalut.git
 cd securevalut
+```
 
+### 2. Create a Virtual Environment
+
+It's recommended to use a virtual environment to manage dependencies.
+
+**Windows:**
+```bash
 python -m venv .venv
-source .venv/bin/activate   # macOS / Linux
-# .venv\Scripts\activate    # Windows
+.venv\Scripts\activate
+```
 
-pip install -r requirements.txt
+**macOS / Linux:**
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
 
-# create .env or set env vars (see Configuration)
+### 3. Install Dependencies
+
+```bash
+pip install -r requirement.txt
+```
+
+### 4. Apply Database Migrations
+
+Initialize the database tables.
+
+```bash
 python manage.py migrate
-python manage.py createsuperuser   # optional
+```
+
+### 5. Create a Superuser (Optional)
+
+To access the Django admin panel, create a superuser account.
+
+```bash
+python manage.py createsuperuser
+```
+Follow the prompts to set a username, email, and password.
+
+### 6. Run the Development Server
+
+```bash
 python manage.py runserver
 ```
 
-Open: http://127.0.0.1:8000
+Open your browser and navigate to: [http://127.0.0.1:8000](http://127.0.0.1:8000)
 
-Configuration
--------------
-Create a .env (or set environment variables) with values similar to:
+## 📂 Project Structure
 
 ```
-SECRET_KEY=your-secret-key
-DEBUG=True
-ALLOWED_HOSTS=127.0.0.1,localhost
-DATABASE_URL=sqlite:///db.sqlite3
-MEDIA_ROOT=./media
-MEDIA_URL=/media/
+securevalut/
+├── files/              # Main application logic (views, models, urls)
+├── fileshare_system/   # Project settings and configuration
+├── media/              # User uploaded files
+├── static/             # Static assets (CSS, JS, Images)
+├── templates/          # HTML Templates
+│   ├── files/          # App-specific templates
+│   └── ...
+├── db.sqlite3          # Database file
+├── manage.py           # Django management script
+└── requirement.txt     # Project dependencies
 ```
 
-For production:
-- Use a strong SECRET_KEY
-- DEBUG=False
-- Configure secure storage (S3) and a production-ready DB (Postgres)
-- Configure HTTPS and ALLOWED_HOSTS
+## 📝 Usage Guide
 
-Deployment tips
----------------
-- Serve static files via a CDN or nginx + WhiteNoise
-- Use Gunicorn + nginx for best performance
-- Configure environment variables via your host (Heroku, DigitalOcean App Platform, etc.)
+1. **Register/Login**: Create an account to start uploading files.
+2. **Upload**: Click the "Upload" button, select a file, and choose visibility settings.
+3. **Share**: 
+   - For **Public** files, copy the generated link or QR code.
+   - For **Private** files, only authorized users can access them.
+4. **Manage**: View your uploaded files in the "My Files" section.
 
-Testing
--------
-Run the Django test suite:
+## 🤝 Contributing
 
-```bash
-python manage.py test
-```
+Contributions are welcome! Please feel free to submit a Pull Request.
 
-Accessibility & UX
-------------------
-- Use semantic HTML and aria attributes for controls
-- Ensure forms provide helpful validation messages
-- Ensure keyboard accessibility for file cards and share modal
+1. Fork the project
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-Contributing
-------------
-Contributions are welcome! Suggested workflow:
-1. Fork the repo
-2. Create a topic branch: git checkout -b feat/responsive-ui
-3. Make changes, add/update tests and screenshots in /assets
-4. Push and open a PR with a short description of changes
+## 📄 License
 
-Please open issues for bugs or enhancement ideas.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-Ideas for improving UI/UX
-- Add drag-and-drop upload on desktop
-- Add progress bar for large uploads (AJAX)
-- Make share modal with optional expiration and password protection
-- Add user profile page to manage uploaded files and settings
+## 📞 Contact
 
-Project structure (high-level)
-------------------------------
-- securevalut/        - Django project settings
-- app/                - main app: models, views, forms, templates, static
-- templates/          - HTML templates (use responsive layouts)
-- static/             - CSS, JS, images
-- assets/             - screenshots, demo GIFs (add these)
-- requirements.txt
+**Dhruv** - [GitHub Profile](https://github.com/Dhruv-4985)
 
-FAQ / Troubleshooting
----------------------
-- Media files not showing?
-  - Check MEDIA_URL and MEDIA_ROOT in settings and that Django serves media in dev.
-- Upload fails?
-  - Check FILE_UPLOAD_MAX_MEMORY_SIZE and file permissions.
-- Database errors?
-  - Run python manage.py migrate
-
-License
--------
-MIT — see LICENSE
-
-Contact
--------
-Maintainer: Dhruv-4985
-GitHub: https://github.com/Dhruv-4985/securevalut
-
-What's next
------------
-- Add the visual assets (screenshots and demo GIF) to /assets in the repo so this README renders beautifully.
-- If you want, I can commit this README.md for you on a new branch and open a PR; say "commit README" and I'll prepare the branch and push the file.
+Project Link: [https://github.com/Dhruv-4985/securevalut](https://github.com/Dhruv-4985/securevalut)

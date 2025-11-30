@@ -131,4 +131,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 **Dhruv** - [GitHub Profile](https://github.com/P-Hevin2004)
 
-Project Link: [https://github.com/Dhruv-4985/securevalut](https://github.com/P-Hevin2004/securevalut)
+Project Link: [https://github.com/P-Hevin2004/securevalut](https://github.com/P-Hevin2004/securevalut)

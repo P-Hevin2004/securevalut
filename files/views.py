@@ -13,7 +13,7 @@ import qrcode
 import io
 import base64
 from .models import SharedFile, UserProfile, Group
-from .forms import FileUploadForm
+from .forms import FileUploadForm, UserUpdateForm
 from .decorators import manager_required, admin_required, user_or_manager_required
 from django.db.models import Q
 
@@ -255,7 +255,27 @@ def admin_dashboard(request):
 @login_required
 def user_profile(request):
     """User profile page"""
-    return render(request, 'files/user_profile.html')
+    user = request.user
+    context = {
+        'files_uploaded': user.sharedfile_set.count(),
+        'total_downloads': sum(f.download_count for f in user.sharedfile_set.all()),
+        'public_files': user.sharedfile_set.filter(is_public=True).count(),
+    }
+    return render(request, 'files/user_profile.html', context)
+
+@login_required
+def edit_profile(request):
+    """Edit user profile"""
+    if request.method == 'POST':
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your profile has been updated!')
+            return redirect('user_profile')
+    else:
+        form = UserUpdateForm(instance=request.user)
+    
+    return render(request, 'files/edit_profile.html', {'form': form})
 
 @login_required
 def logout_view(request):

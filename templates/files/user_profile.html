@@ -12,6 +12,9 @@
                         <i class="fas fa-user-circle"></i> My Profile
                     </h2>
                     <div class="profile-actions">
+                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-secondary me-2">
+                            <i class="fas fa-user-edit"></i> Edit Profile
+                        </a>
                         <a href="{% url 'my_files' %}" class="btn btn-outline-primary">
                             <i class="fas fa-folder"></i> My Files
                         </a>
@@ -62,7 +65,7 @@
                                 <i class="fas fa-file"></i>
                             </div>
                             <div class="stat-info">
-                                <h6>{{ user.sharedfile_set.count }}</h6>
+                                <h6>{{ files_uploaded }}</h6>
                                 <p>Files Uploaded</p>
                             </div>
                         </div>
@@ -71,7 +74,7 @@
                                 <i class="fas fa-download"></i>
                             </div>
                             <div class="stat-info">
-                                <h6>{{ user.sharedfile_set.all|length|add:"0" }}</h6>
+                                <h6>{{ total_downloads }}</h6>
                                 <p>Total Downloads</p>
                             </div>
                         </div>
@@ -80,7 +83,7 @@
                                 <i class="fas fa-share"></i>
                             </div>
                             <div class="stat-info">
-                                <h6>{{ user.sharedfile_set.filter.is_public=True|length }}</h6>
+                                <h6>{{ public_files }}</h6>
                                 <p>Public Files</p>
                             </div>
                         </div>

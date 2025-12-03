@@ -62,3 +62,12 @@ class FileUploadForm(forms.ModelForm):
             # Save many-to-many relationships
             self.save_m2m()
         return instance
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(required=True, widget=forms.EmailInput(attrs={'class': 'form-control'}))
+    first_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    last_name = forms.CharField(required=False, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']

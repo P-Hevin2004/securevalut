@@ -2,6 +2,9 @@
 
 {% block title %}Register - FileShare{% endblock %}
 
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
 {% block main_class %}{% endblock %}
 
 {% block content %}
@@ -11,9 +14,11 @@
             <div class="col-lg-5 col-md-7">
                 <div class="auth-card">
                     <div class="auth-header">
-                        <div class="auth-logo">
-                            <i class="fas fa-user-plus"></i>
-                        </div>
+                        <a href="{% url 'home' %}" class="text-decoration-none">
+                            <div class="auth-logo">
+                                <i class="fas fa-user-plus"></i>
+                            </div>
+                        </a>
                         <h2 class="auth-title">Create Account</h2>
                         <p class="auth-subtitle">Join FileShare and start sharing files</p>
                     </div>
